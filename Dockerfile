@@ -6,20 +6,21 @@ LABEL maintainer="walentinlamonos@gmail.com"
 
 RUN set -x \
 # Install Mordhau server dependencies and clean up
-	&& apt-get install -y --no-install-recommends --no-install-suggests \
-		libfontconfig1 \
-		libpangocairo-1.0-0 \
-		libnss3 \
-		libgconf2-4 \
-		libxi6 \
-		libxcursor1 \
-		libxss1 \
-		libxcomposite1 \
-		libasound2 \
-		libxdamage1 \
-		libxtst6 \
-		libatk1.0-0 \
-		libxrandr2 \
+	&& su root -c \
+		"apt-get install -y --no-install-recommends --no-install-suggests \
+			libfontconfig1 \
+			libpangocairo-1.0-0 \
+			libnss3 \
+			libgconf2-4 \
+			libxi6 \
+			libxcursor1 \
+			libxss1 \
+			libxcomposite1 \
+			libasound2 \
+			libxdamage1 \
+			libxtst6 \
+			libatk1.0-0 \
+			libxrandr2" \
 	&& apt-get clean autoclean \
         && apt-get autoremove -y \
 	&& rm -rf /var/lib/{apt,dpkg,cache,log}/ \
@@ -30,7 +31,7 @@ RUN set -x \
 		+app_update 629800 validate \
 		+quit \
 # Write Server Config
-# {{SERVER_PW}} and {{SERVER_ADMINPW}} gets replaced by entrypoint
+# {{SERVER_PW}}, {{SERVER_ADMINPW}} and {{SERVER_MAXPLAYERS}} gets replaced by entrypoint
 	&& { \
 		echo '[/Script/Mordhau.MordhauGameMode]'; \
 		echo 'PlayerRespawnTime=5.000000'; \
@@ -65,7 +66,7 @@ RUN set -x \
 		echo ''; \
 		echo '[/Script/Mordhau.MordhauGameSession]'; \
 		echo 'bIsLANServer=False'; \
-		echo 'MaxSlots=32'; \
+		echo 'MaxSlots={{SERVER_MAXPLAYERS}}'; \
 		echo 'ServerName=New Mordhau Server'; \
 		echo 'ServerPassword={{SERVER_PW}}'; \
 		echo 'AdminPassword={{SERVER_ADMINPW}}'; \
@@ -73,7 +74,7 @@ RUN set -x \
 		echo 'BannedPlayers=()'; \
 	} > /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini
 
-ENV SERVER_ADMINPW="replacethisyoumadlad" SERVER_PW="" SERVER_TICKRATE=60 SERVER_PORT=7777 SERVER_QUERYPORT=27015 
+ENV SERVER_ADMINPW="replacethisyoumadlad" SERVER_PW="" SERVER_MAXPLAYERS=32 SERVER_TICKRATE=60 SERVER_PORT=7777 SERVER_QUERYPORT=27015 
 
 VOLUME /home/steam/mordhau-dedicated
 
@@ -84,6 +85,7 @@ VOLUME /home/steam/mordhau-dedicated
 ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/mordhau-dedicated +app_update 629800 +quit && \
 		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
 		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
+		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
 		./bin/sed -i 's/GameServerQueryPort=27015/GameServerQueryPort='"$SERVER_QUERYPORT"'/g' /home/steam/mordhau-dedicated/Mordhau/Engine/Config/BaseEngine.ini && \
 		./bin/sed -i 's/Port=7777/Port='"$SERVER_PORT"'/g' /home/steam/mordhau-dedicated/Mordhau/Engine/Config/BaseEngine.ini && \
 		./bin/sed -i 's/NetServerMaxTickRate=30/NetServerMaxTickRate='"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Mordhau/Engine/Config/BaseEngine.ini && \
