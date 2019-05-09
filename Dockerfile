@@ -79,7 +79,8 @@ VOLUME /home/steam/mordhau-dedicated
 
 # Set Entrypoint; Technically 2 steps: 1. Update server, 2. Start server
 ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/mordhau-dedicated +app_update 629800 +quit && \
-		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini
+		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
+		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini
 		./home/steam/csgo-dedicated/MordhauServer.sh -log -gameini=Game.All.ini
 
 # Expose ports
