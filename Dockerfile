@@ -77,11 +77,17 @@ ENV SERVER_ADMINPW="replacethisyoumadlad" SERVER_PW="" SERVER_TICKRATE=60 SERVER
 
 VOLUME /home/steam/mordhau-dedicated
 
-# Set Entrypoint; Technically 2 steps: 1. Update server, 2. Start server
+# Set Entrypoint
+# 1. Update server
+# 2. Replace config parameters with ENV variables
+# 3. Start the server
 ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/mordhau-dedicated +app_update 629800 +quit && \
 		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
-		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini
+		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
+		./bin/sed -i 's/GameServerQueryPort=27015/GameServerQueryPort='"$SERVER_QUERYPORT"'/g' /home/steam/mordhau-dedicated/Mordhau/Engine/Config/BaseEngine.ini && \
+		./bin/sed -i 's/Port=7777/Port='"$SERVER_PORT"'/g' /home/steam/mordhau-dedicated/Mordhau/Engine/Config/BaseEngine.ini && \
+		./bin/sed -i 's/NetServerMaxTickRate=30/NetServerMaxTickRate='"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Mordhau/Engine/Config/BaseEngine.ini && \
 		./home/steam/csgo-dedicated/MordhauServer.sh -log -gameini=Game.All.ini
 
 # Expose ports
-EXPOSE 27015 7777 7778
+EXPOSE 27015 7777
