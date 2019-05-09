@@ -32,6 +32,7 @@ RUN set -x \
 		+force_install_dir /home/steam/mordhau-dedicated \
 		+app_update 629800 validate \
 		+quit \
+		&& mkdir -p /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/ \
 		&& { \
 			echo '[/Script/Mordhau.MordhauGameMode]'; \
 			echo 'PlayerRespawnTime=5.000000'; \
