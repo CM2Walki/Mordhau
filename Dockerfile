@@ -87,9 +87,9 @@ VOLUME /home/steam/mordhau-dedicated
 # 2. Replace config parameters with ENV variables
 # 3. Start the server
 ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/mordhau-dedicated +app_update 629800 +quit && \
-		./bin/sed -i 's/{{SERVER_PW}}/ServerPassword='"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
-		./bin/sed -i 's/{{SERVER_ADMINPW}}/AdminPassword='"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
-		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/MaxSlots='"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
+		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
+		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
+		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
 		./bin/sed -i 's/GameServerQueryPort=27015/GameServerQueryPort='"$SERVER_QUERYPORT"'/g' /home/steam/mordhau-dedicated/Engine/Config/BaseEngine.ini && \
 		./bin/sed -i 's/Port=7777/Port='"$SERVER_PORT"'/g' /home/steam/mordhau-dedicated/Engine/Config/BaseEngine.ini && \
 		./bin/sed -i 's/NetServerMaxTickRate=30/NetServerMaxTickRate='"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Engine/Config/BaseEngine.ini && \
