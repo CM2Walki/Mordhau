@@ -82,7 +82,7 @@ ENV SERVER_ADMINPW="replacethisyoumadlad" \
 	SERVER_PORT=7777 \
 	SERVER_QUERYPORT=27015 \
 	SERVER_BEACONPORT=15000 \
-	SERVER_DEFAULTMAP="/Game/Mordhau/Maps/ThePit/FFA_ThePit.FFA_ThePit"
+	SERVER_DEFAULTMAP="\/Game\/Mordhau\/Maps\/ThePit\/FFA_ThePit.FFA_ThePit"
 
 # Switch to user steam
 USER steam
