@@ -81,7 +81,8 @@ ENV SERVER_ADMINPW="replacethisyoumadlad" \
 	SERVER_TICKRATE=60 \
 	SERVER_PORT=7777 \
 	SERVER_QUERYPORT=27015 \
-	SERVER_BEACONPORT=15000
+	SERVER_BEACONPORT=15000 \
+	SERVER_DEFAULTMAP="/Game/Mordhau/Maps/ThePit/FFA_ThePit.FFA_ThePit"
 
 # Switch to user steam
 USER steam
@@ -96,8 +97,9 @@ ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir
 		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
 		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
 		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
-		./bin/sed -i 's/NetServerMaxTickRate=30/NetServerMaxTickRate='"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Engine/Config/BaseEngine.ini && \
-		./home/steam/mordhau-dedicated/MordhauServer.sh -log -port=$SERVER_PORT -queryport=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT -GAMEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini -ENGINEINI=/home/steam/mordhau-dedicated/Engine/Config/BaseEngine.ini
+		./bin/sed -i 's/NetServerMaxTickRate=60/NetServerMaxTickRate='"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Mordhau/Config/DefaultEngine.ini && \
+		./bin/sed -i 's/ServerDefaultMap=\/Game\/Mordhau\/Maps\/ThePit\/FFA_ThePit.FFA_ThePit/ServerDefaultMap='"$SERVER_DEFAULTMAP"'/g' /home/steam/mordhau-dedicated/Mordhau/Config/DefaultEngine.ini && \
+		./home/steam/mordhau-dedicated/MordhauServer.sh -log -port=$SERVER_PORT -queryport=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT -GAMEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini -ENGINEINI=/home/steam/mordhau-dedicated/Mordhau/Config/DefaultEngine.ini
 
 # Expose ports
 EXPOSE 27015 15000 7777
