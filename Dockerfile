@@ -21,7 +21,7 @@ RUN set -x \
 			libatk1.0-0 \
 			libxrandr2 \
 	&& apt-get clean autoclean \
-        && apt-get autoremove -y \
+	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/{apt,dpkg,cache,log}/ \
 # Run Steamcmd and install Mordhau
 # Write Server Config
