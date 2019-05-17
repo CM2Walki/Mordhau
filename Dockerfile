@@ -105,7 +105,7 @@ ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir
 		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
 		./bin/sed -i 's/{{SERVER_TICKRATE}}/'"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.All.ini && \
 		./bin/sed -i 's/{{SERVER_DEFAULTMAP}}/'"$SERVER_DEFAULTMAP"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.All.ini && \
-		./home/steam/mordhau-dedicated/MordhauServer.sh -log -port=$SERVER_PORT -queryport=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT -GAMEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini -ENGINEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.All.ini
+		./home/steam/mordhau-dedicated/MordhauServer.sh -log -Port=$SERVER_PORT -QueryPort=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT -GAMEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini -ENGINEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.All.ini
 
 # Expose ports
 EXPOSE 27015 15000 7777
