@@ -73,13 +73,13 @@ RUN set -x \
 			echo 'AdminPassword={{SERVER_ADMINPW}}'; \
 			echo 'Admins=0'; \
 			echo 'BannedPlayers=()'; \
-		} > /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini \
+		} > /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini \
 		&& { \
 			echo '[/Script/EngineSettings.GameMapsSettings]'; \
 			echo 'ServerDefaultMap={{SERVER_DEFAULTMAP}}'; \
 			echo '[/Script/OnlineSubsystemUtils.IpNetDriver]'; \
 			echo 'NetServerMaxTickRate={{SERVER_TICKRATE}}'; \
-		} > /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.All.ini"
+		} > /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.ini"
 
 ENV SERVER_ADMINPW="replacethisyoumadlad" \
 	SERVER_PW="" \
@@ -100,12 +100,12 @@ VOLUME /home/steam/mordhau-dedicated
 # 2. Replace config parameters with ENV variables
 # 3. Start the server
 ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/mordhau-dedicated +app_update 629800 +quit && \
-		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
-		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
-		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini && \
-		./bin/sed -i 's/{{SERVER_TICKRATE}}/'"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.All.ini && \
-		./bin/sed -i 's/{{SERVER_DEFAULTMAP}}/'"$SERVER_DEFAULTMAP"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.All.ini && \
-		./home/steam/mordhau-dedicated/MordhauServer.sh -log -Port=$SERVER_PORT -QueryPort=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT -GAMEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.All.ini -ENGINEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.All.ini
+		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
+		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
+		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
+		./bin/sed -i 's/{{SERVER_TICKRATE}}/'"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.ini && \
+		./bin/sed -i 's/{{SERVER_DEFAULTMAP}}/'"$SERVER_DEFAULTMAP"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.ini && \
+		./home/steam/mordhau-dedicated/MordhauServer.sh -log -Port=$SERVER_PORT -QueryPort=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT -GAMEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini -ENGINEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.ini
 
 # Expose ports
 EXPOSE 27015 15000 7777
