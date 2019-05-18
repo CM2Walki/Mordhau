@@ -2,8 +2,8 @@
 # Supported tags and respective `Dockerfile` links
 -	[`latest` (*stretch/Dockerfile*)](https://github.com/CM2Walki/Mordhau/blob/master/stretch/Dockerfile)
 
-# What is Squad?
-Squad is a tactical FPS that provides authentic combat experiences through teamwork, communication, and gameplay. It seeks to bridge the large gap between arcade shooter and military simulation. Large scale, combined arms combat, base building, and a great integrated VoIP system. <br/>
+# What is Mordhau?
+MORDHAU is a multiplayer medieval slasher. Create your mercenary and fight in brutal battles where you will experience fast paced combat, castle sieges, cavalry charges, and more. <br/>
 This Docker image contains the dedicated server of the game. <br/>
 
 > [Mordhau](https://store.steampowered.com/app/629760/MORDHAU/)
