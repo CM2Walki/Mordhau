@@ -1,4 +1,4 @@
-[![Docker Build Status](https://img.shields.io/docker/build/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![Docker Stars](https://img.shields.io/docker/stars/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![Docker Pulls](https://img.shields.io/docker/pulls/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![](https://images.microbadger.com/badges/image/cm2network/mordhau.svg)](https://microbadger.com/images/cm2network/mordhau)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![Docker Stars](https://img.shields.io/docker/stars/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![Docker Pulls](https://img.shields.io/docker/pulls/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![](https://images.microbadger.com/badges/image/cm2network/mordhau.svg)](https://microbadger.com/images/cm2network/mordhau)
 # Supported tags and respective `Dockerfile` links
 -	[`latest` (*stretch/Dockerfile*)](https://github.com/CM2Walki/Mordhau/blob/master/stretch/Dockerfile)
 
