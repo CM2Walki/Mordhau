@@ -20,7 +20,7 @@ $ docker run -d --net=host --name=mordhau-dedicated cm2network/mordhau
 
 Running multiple instances (iterate SERVER_PORT, SERVER_QUERYPORT and SERVER_BEACONPORT):<br/>
 ```console
-$ docker run -d --net=host -e SERVER_PORT=7778 -e SERVER_QUERYPORT=27016 -e SERVER_BEACONPORT=15001 --name=mordhau-dedicated cm2network/mordhau
+$ docker run -d --net=host -e SERVER_PORT=7778 -e SERVER_QUERYPORT=27016 -e SERVER_BEACONPORT=15001 --name=mordhau-dedicated2 cm2network/mordhau
 ```
 
 **It's also recommended using "--cpuset-cpus=" to limit the game server to a specific core & thread.**<br/>
