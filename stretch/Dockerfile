@@ -31,7 +31,7 @@ RUN set -x \
 # Write Server Config
 # {{SERVER_PW}}, {{SERVER_ADMINPW}} and {{SERVER_MAXPLAYERS}} gets replaced by entrypoint
 	&& su steam -c \
-		".${STEAMCMDDIR}/steamcmd.sh \
+		"${STEAMCMDDIR}/steamcmd.sh \
 		+login anonymous \
 		+force_install_dir ${STEAMAPPDIR} \
 		+app_update ${STEAMAPPID} validate \
@@ -106,13 +106,13 @@ VOLUME $STEAMAPPDIR
 # 2. Replace config parameters with ENV variables
 # 3. Start the server
 # You may not like it, but this is what peak Entrypoint looks like.
-ENTRYPOINT .${STEAMCMDDIR}/steamcmd.sh +login anonymous +force_install_dir ${STEAMAPPDIR} +app_update ${STEAMAPPID} +quit && \
+ENTRYPOINT ${STEAMCMDDIR}/steamcmd.sh +login anonymous +force_install_dir ${STEAMAPPDIR} +app_update ${STEAMAPPID} +quit && \
 		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini && \
 		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini && \
 		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini && \
 		./bin/sed -i 's/{{SERVER_TICKRATE}}/'"$SERVER_TICKRATE"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini && \
 		./bin/sed -i 's/{{SERVER_DEFAULTMAP}}/'"$SERVER_DEFAULTMAP"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini && \
-		.${STEAMAPPDIR}/MordhauServer.sh -log \
+		${STEAMAPPDIR}/MordhauServer.sh -log \
 			-Port=$SERVER_PORT -QueryPort=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT \
 			-GAMEINI=${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini \
 			-ENGINEINI=${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini
