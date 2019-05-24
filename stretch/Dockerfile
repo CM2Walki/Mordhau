@@ -11,19 +11,19 @@ ENV STEAMAPPDIR /home/steam/mordhau-dedicated
 RUN set -x \
 # Install Mordhau server dependencies and clean up
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
-			libfontconfig1 \
-			libpangocairo-1.0-0 \
-			libnss3 \
-			libgconf2-4 \
-			libxi6 \
-			libxcursor1 \
-			libxss1 \
-			libxcomposite1 \
-			libasound2 \
-			libxdamage1 \
-			libxtst6 \
-			libatk1.0-0 \
-			libxrandr2 \
+		libfontconfig1 \
+		libpangocairo-1.0-0 \
+		libnss3 \
+		libgconf2-4 \
+		libxi6 \
+		libxcursor1 \
+		libxss1 \
+		libxcomposite1 \
+		libasound2 \
+		libxdamage1 \
+		libxtst6 \
+		libatk1.0-0 \
+		libxrandr2 \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/{apt,dpkg,cache,log}/ \
