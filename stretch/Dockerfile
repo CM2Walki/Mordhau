@@ -106,7 +106,8 @@ VOLUME $STEAMAPPDIR
 # 2. Replace config parameters with ENV variables
 # 3. Start the server
 # You may not like it, but this is what peak Entrypoint looks like.
-ENTRYPOINT ${STEAMCMDDIR}/steamcmd.sh +login anonymous +force_install_dir ${STEAMAPPDIR} +app_update ${STEAMAPPID} +quit \
+ENTRYPOINT ${STEAMCMDDIR}/steamcmd.sh \
+			+login anonymous +force_install_dir ${STEAMAPPDIR} +app_update ${STEAMAPPID} +quit \
 		&& /bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g'; \
 			's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g'; \
 			's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini \
