@@ -2,7 +2,10 @@
 # Dockerfile that builds a Mordhau Gameserver
 ###########################################################
 FROM cm2network/steamcmd:root
+
 LABEL maintainer="walentinlamonos@gmail.com"
+
+ENV STEAMAPPID 629800
 
 RUN set -x \
 # Install Mordhau server dependencies and clean up
@@ -30,7 +33,7 @@ RUN set -x \
 		"./home/steam/steamcmd/steamcmd.sh \
 		+login anonymous \
 		+force_install_dir /home/steam/mordhau-dedicated \
-		+app_update 629800 validate \
+		+app_update ${STEAMAPPID} validate \
 		+quit \
 		&& mkdir -p /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/ \
 		&& { \
@@ -99,7 +102,7 @@ VOLUME /home/steam/mordhau-dedicated
 # 1. Update server
 # 2. Replace config parameters with ENV variables
 # 3. Start the server
-ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/mordhau-dedicated +app_update 629800 +quit && \
+ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/mordhau-dedicated +app_update ${STEAMAPPID} +quit && \
 		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
 		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
 		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
