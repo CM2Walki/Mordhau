@@ -6,6 +6,7 @@ FROM cm2network/steamcmd:root
 LABEL maintainer="walentinlamonos@gmail.com"
 
 ENV STEAMAPPID 629800
+ENV STEAMAPPDIR /home/steam/mordhau-dedicated
 
 RUN set -x \
 # Install Mordhau server dependencies and clean up
@@ -30,12 +31,12 @@ RUN set -x \
 # Write Server Config
 # {{SERVER_PW}}, {{SERVER_ADMINPW}} and {{SERVER_MAXPLAYERS}} gets replaced by entrypoint
 	&& su steam -c \
-		"./home/steam/steamcmd/steamcmd.sh \
+		".${STEAMCMDDIR}/steamcmd.sh \
 		+login anonymous \
-		+force_install_dir /home/steam/mordhau-dedicated \
+		+force_install_dir ${STEAMAPPDIR} \
 		+app_update ${STEAMAPPID} validate \
 		+quit \
-		&& mkdir -p /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/ \
+		&& mkdir -p ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/ \
 		&& { \
 			echo '[/Script/Mordhau.MordhauGameMode]'; \
 			echo 'PlayerRespawnTime=5.000000'; \
@@ -76,13 +77,13 @@ RUN set -x \
 			echo 'AdminPassword={{SERVER_ADMINPW}}'; \
 			echo 'Admins=0'; \
 			echo 'BannedPlayers=()'; \
-		} > /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini \
+		} > ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini \
 		&& { \
 			echo '[/Script/EngineSettings.GameMapsSettings]'; \
 			echo 'ServerDefaultMap={{SERVER_DEFAULTMAP}}'; \
 			echo '[/Script/OnlineSubsystemUtils.IpNetDriver]'; \
 			echo 'NetServerMaxTickRate={{SERVER_TICKRATE}}'; \
-		} > /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.ini"
+		} > ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini"
 
 ENV SERVER_ADMINPW="replacethisyoumadlad" \
 	SERVER_PW="" \
@@ -96,19 +97,25 @@ ENV SERVER_ADMINPW="replacethisyoumadlad" \
 # Switch to user steam
 USER steam
 
-VOLUME /home/steam/mordhau-dedicated
+WORKDIR $STEAMAPPDIR
+
+VOLUME $STEAMAPPDIR
 
 # Set Entrypoint
 # 1. Update server
 # 2. Replace config parameters with ENV variables
 # 3. Start the server
-ENTRYPOINT ./home/steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir /home/steam/mordhau-dedicated +app_update ${STEAMAPPID} +quit && \
-		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
-		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
-		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini && \
-		./bin/sed -i 's/{{SERVER_TICKRATE}}/'"$SERVER_TICKRATE"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.ini && \
-		./bin/sed -i 's/{{SERVER_DEFAULTMAP}}/'"$SERVER_DEFAULTMAP"'/g' /home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.ini && \
-		./home/steam/mordhau-dedicated/MordhauServer.sh -log -Port=$SERVER_PORT -QueryPort=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT -GAMEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Game.ini -ENGINEINI=/home/steam/mordhau-dedicated/Mordhau/Saved/Config/LinuxServer/Engine.ini
+# You may not like it, but this is what peak Entrypoint looks like.
+ENTRYPOINT .${STEAMCMDDIR}/steamcmd.sh +login anonymous +force_install_dir ${STEAMAPPDIR} +app_update ${STEAMAPPID} +quit && \
+		./bin/sed -i 's/{{SERVER_PW}}/'"$SERVER_PW"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini && \
+		./bin/sed -i 's/{{SERVER_ADMINPW}}/'"$SERVER_ADMINPW"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini && \
+		./bin/sed -i 's/{{SERVER_MAXPLAYERS}}/'"$SERVER_MAXPLAYERS"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini && \
+		./bin/sed -i 's/{{SERVER_TICKRATE}}/'"$SERVER_TICKRATE"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini && \
+		./bin/sed -i 's/{{SERVER_DEFAULTMAP}}/'"$SERVER_DEFAULTMAP"'/g' ${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini && \
+		.${STEAMAPPDIR}/MordhauServer.sh -log \
+			-Port=$SERVER_PORT -QueryPort=$SERVER_QUERYPORT -BeaconPort=$SERVER_BEACONPORT \
+			-GAMEINI=${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Game.ini \
+			-ENGINEINI=${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini
 
 # Expose ports
 EXPOSE 27015 15000 7777
