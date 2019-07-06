@@ -10,6 +10,7 @@ ENV STEAMAPPDIR /home/steam/mordhau-dedicated
 
 RUN set -x \
 # Install Mordhau server dependencies and clean up
+	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 		libfontconfig1=2.11.0-6.7+b1 \
 		libpangocairo-1.0-0=1.40.5-1 \
