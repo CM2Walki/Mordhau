@@ -26,6 +26,7 @@ RUN set -x \
 		libatk1.0-0=2.22.0-1 \
 		libxrandr2=2:1.5.1-1 \
 		libcurl3-gnutls=7.52.1-5+deb9u9 \
+		libcurl3=7.52.1-5+deb9u9 \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/* \
