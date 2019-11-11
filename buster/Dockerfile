@@ -123,5 +123,5 @@ ENTRYPOINT ${STEAMCMDDIR}/steamcmd.sh \
 
 # Expose ports
 EXPOSE 27015/udp \
-	15000/tcp \
-	7777/udp
+	 15000/tcp \
+	 7777/udp
