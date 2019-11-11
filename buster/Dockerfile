@@ -12,21 +12,21 @@ RUN set -x \
 # Install Mordhau server dependencies and clean up
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
-		libfontconfig1=2.11.0-6.7+b1 \
-		libpangocairo-1.0-0=1.40.5-1 \
-		libnss3=2:3.26.2-1.1+deb9u1 \
-		libgconf2-4=3.2.6-4+b1 \
+		libfontconfig1=2.13.1-2 \
+		libpangocairo-1.0-0=2.13.1-2 \
+		libnss3=2:3.42.1-1+deb10u1 \
+		libgconf2-4=3.2.6-5 \
 		libxi6=2:1.7.9-1 \
-		libxcursor1=1:1.1.14-1+deb9u2 \
-		libxss1=1:1.2.2-1 \
+		libxcursor1=1:1.1.15-2 \
+		libxss1=1:1.2.3-1 \
 		libxcomposite1=1:0.4.4-2 \
-		libasound2=1.1.3-5 \
-		libxdamage1=1:1.1.4-2+b3 \
+		libasound2=1.1.8-1 \
+		libxdamage1=1:1.1.4-3+b3 \
 		libxtst6=2:1.2.3-1 \
-		libatk1.0-0=2.22.0-1 \
+		libatk1.0-0=2.30.0-2 \
 		libxrandr2=2:1.5.1-1 \
-		libcurl3-gnutls=7.52.1-5+deb9u9 \
-		libcurl3=7.52.1-5+deb9u9 \
+		libcurl3-gnutls=7.64.0-4 \
+		libcurl4=7.64.0-4 \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/* \
@@ -122,4 +122,6 @@ ENTRYPOINT ${STEAMCMDDIR}/steamcmd.sh \
 			-ENGINEINI=${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini
 
 # Expose ports
-EXPOSE 27015 15000 7777
+EXPOSE 27015/udp \
+	15000/tcp \
+	7777/udp
