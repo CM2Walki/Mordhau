@@ -122,6 +122,4 @@ ENTRYPOINT ${STEAMCMDDIR}/steamcmd.sh \
 			-ENGINEINI=${STEAMAPPDIR}/Mordhau/Saved/Config/LinuxServer/Engine.ini
 
 # Expose ports
-EXPOSE 27015/udp \
-	 15000/tcp \
-	 7777/udp
+EXPOSE 27015/udp 15000/tcp 7777/udp
