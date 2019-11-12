@@ -1,7 +1,7 @@
 [![](https://img.shields.io/codacy/grade/7e5de07822de4aeca9104ac810e1cb0b.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![Docker Build Status](https://img.shields.io/docker/cloud/build/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![Docker Stars](https://img.shields.io/docker/stars/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![Docker Pulls](https://img.shields.io/docker/pulls/cm2network/mordhau.svg)](https://hub.docker.com/r/cm2network/mordhau/) [![](https://images.microbadger.com/badges/image/cm2network/mordhau.svg)](https://microbadger.com/images/cm2network/mordhau)
 
 # Supported tags and respective `Dockerfile` links
--	[`latest` (*stretch/Dockerfile*)](https://github.com/CM2Walki/Mordhau/blob/master/stretch/Dockerfile)
+-	[`latest` (*buster/Dockerfile*)](https://github.com/CM2Walki/Mordhau/blob/master/buster/Dockerfile)
 
 # What is Mordhau?
 MORDHAU is a multiplayer medieval slasher. Create your mercenary and fight in brutal battles where you will experience fast paced combat, castle sieges, cavalry charges, and more. <br/>
