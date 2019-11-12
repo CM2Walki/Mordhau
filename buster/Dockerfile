@@ -13,9 +13,9 @@ RUN set -x \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 		libfontconfig1=2.13.1-2 \
-		libpangocairo-1.0-0=2.13.1-2 \
+		libpangocairo-1.0-0=1.42.4-7~deb10u1 \
 		libnss3=2:3.42.1-1+deb10u1 \
-		libgconf2-4=3.2.6-5 \
+		gconf-gsettings-backend=3.2.6-5 \
 		libxi6=2:1.7.9-1 \
 		libxcursor1=1:1.1.15-2 \
 		libxss1=1:1.2.3-1 \
