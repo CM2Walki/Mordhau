@@ -48,7 +48,7 @@ ENV SERVER_ADMINPW="replacethisyoumadlad" \
 	SERVER_BEACONPORT=15000 \
 	SERVER_GAMEINI="cfg/Game.ini" \
 	SERVER_ENGINEINI="cfg/Engine.ini" \
-	SERVER_DEFAULTMAP="\/ThePit\/FFA_ThePit.FFA_ThePit" \
+	SERVER_DEFAULTMAP="ThePit\/FFA_ThePit.FFA_ThePit" \
 	STEAMCMD_UPDATE_ARGS="" \
 	ADDITIONAL_ARGS=""
 
