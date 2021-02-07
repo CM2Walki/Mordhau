@@ -12,9 +12,6 @@ fi
 
 # We assume that if the config is missing, that this is a fresh container
 if [ ! -f "${STEAMAPPDIR}/cfg/Game.ini" ]; then
-	# Create directory
-	mkdir -p "${STEAMAPPDIR}/"
-	
 	# Download & extract the configs
 	wget -qO- "${DLURL}/master/etc/Config.tar.gz" | tar xvzf - -C "${STEAMAPPDIR}/"
 	
