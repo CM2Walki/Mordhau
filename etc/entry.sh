@@ -19,10 +19,10 @@ if [ ! -f "${STEAMAPPDIR}/cfg/Game.ini" ]; then
 	sed -i -e 's/{{SERVER_PW}}/'"${SERVER_PW}"'/g' \
 			-e 's/{{SERVER_ADMINPW}}/'"${SERVER_ADMINPW}"'/g' \
 			-e 's/{{SERVER_NAME}}/'"${SERVER_NAME}"'/g' \
-			-e 's/{{SERVER_MAXPLAYERS}}/'"${SERVER_MAXPLAYERS}"'/g' "${STEAMAPPDIR}/${STEAMAPP}/cfg/Game.ini"
+			-e 's/{{SERVER_MAXPLAYERS}}/'"${SERVER_MAXPLAYERS}"'/g' "${STEAMAPPDIR}/cfg/Game.ini"
 
 	sed -i -e 's/{{SERVER_TICKRATE}}/'"${SERVER_TICKRATE}"'/g' \
-			-e 's/{{SERVER_DEFAULTMAP}}/'"${SERVER_DEFAULTMAP}"'/g' "${STEAMAPPDIR}/${STEAMAPP}/cfg/Engine.ini"
+			-e 's/{{SERVER_DEFAULTMAP}}/'"${SERVER_DEFAULTMAP}"'/g' "${STEAMAPPDIR}/cfg/Engine.ini"
 fi
 
 # Switch to workdir
