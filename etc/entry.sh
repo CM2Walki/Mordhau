@@ -13,7 +13,7 @@ fi
 # We assume that if the config is missing, that this is a fresh container
 if [ ! -f "${STEAMAPPDIR}/cfg/Game.ini" ]; then
 	# Download & extract the configs
-	wget -qO- "${DLURL}/master/etc/Config.tar.gz" | tar xvzf - -C "${STEAMAPPDIR}/"
+	wget -qO- "${DLURL}/master/etc/cfg.tar.gz" | tar xvzf - -C "${STEAMAPPDIR}/"
 	
 	# Change first launch variables (you can comment this out if it has done it's purpose)
 	sed -i -e 's/{{SERVER_PW}}/'"${SERVER_PW}"'/g' \
