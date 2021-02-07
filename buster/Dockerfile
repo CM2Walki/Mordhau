@@ -31,6 +31,7 @@ RUN set -x \
 		libcurl4=7.64.0-4+deb10u1 \
 		wget=1.20.1-1.1 \
 		ca-certificates=20190110 \
+		iputils-ping=3:20180629-2+deb10u1 \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& wget --max-redirect=30 "${DLURL}/master/etc/entry.sh" -O "${HOMEDIR}/entry.sh" \
 	&& chmod +x "${HOMEDIR}/entry.sh" \
