@@ -11,21 +11,21 @@ else
 fi
 
 # We assume that if the config is missing, that this is a fresh container
-if [ ! -f "${STEAMAPPDIR}/${STEAMAPP}/cfg/Game.ini" ]; then
+if [ ! -f "${STEAMAPPDIR}/cfg/Game.ini" ]; then
 	# Create directory
-	mkdir -p "${STEAMAPPDIR}/${STEAMAPP}/"
+	mkdir -p "${STEAMAPPDIR}/"
 	
 	# Download & extract the configs
-	wget -qO- "${DLURL}/master/etc/Config.tar.gz" | tar xvzf - -C "${STEAMAPPDIR}/${STEAMAPP}/"
+	wget -qO- "${DLURL}/master/etc/Config.tar.gz" | tar xvzf - -C "${STEAMAPPDIR}/"
 	
 	# Change first launch variables (you can comment this out if it has done it's purpose)
 	sed -i -e 's/{{SERVER_PW}}/'"${SERVER_PW}"'/g' \
 			-e 's/{{SERVER_ADMINPW}}/'"${SERVER_ADMINPW}"'/g' \
 			-e 's/{{SERVER_NAME}}/'"${SERVER_NAME}"'/g' \
-			-e 's/{{SERVER_MAXPLAYERS}}/'"${SERVER_MAXPLAYERS}"'/g' "${STEAMAPPDIR}/${STEAMAPP}/Saved/Config/LinuxServer/Game.ini"
+			-e 's/{{SERVER_MAXPLAYERS}}/'"${SERVER_MAXPLAYERS}"'/g' "${STEAMAPPDIR}/${STEAMAPP}/cfg/Game.ini"
 
 	sed -i -e 's/{{SERVER_TICKRATE}}/'"${SERVER_TICKRATE}"'/g' \
-			-e 's/{{SERVER_DEFAULTMAP}}/'"${SERVER_DEFAULTMAP}"'/g' "${STEAMAPPDIR}/${STEAMAPP}/Saved/Config/LinuxServer/Engine.ini"
+			-e 's/{{SERVER_DEFAULTMAP}}/'"${SERVER_DEFAULTMAP}"'/g' "${STEAMAPPDIR}/${STEAMAPP}/cfg/Engine.ini"
 fi
 
 # Switch to workdir
