@@ -6,7 +6,7 @@ FROM cm2network/steamcmd:root
 LABEL maintainer="walentinlamonos@gmail.com"
 
 ENV STEAMAPPID 629800
-ENV STEAMAPP Mordhau
+ENV STEAMAPP mordhau
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
 ENV DLURL https://raw.githubusercontent.com/CM2Walki/Mordhau
 
