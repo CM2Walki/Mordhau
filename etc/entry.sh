@@ -26,7 +26,7 @@ if [ ! -f "${STEAMAPPDIR}/cfg/Game.ini" ]; then
 fi
 
 # Switch to workdir
-cd ${STEAMAPPDIR}
+cd "${STEAMAPPDIR}"
 
 bash "${STEAMAPPDIR}/MordhauServer.sh" \
 			-log \
