@@ -10,8 +10,8 @@ ENV STEAMAPP mordhau
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
 ENV DLURL https://raw.githubusercontent.com/CM2Walki/Mordhau
 
-# Install Mordhau server dependencies and clean up
 RUN set -x \
+	# Install, update & upgrade packages
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 		libfontconfig1=2.13.1-2 \
@@ -33,9 +33,11 @@ RUN set -x \
 		ca-certificates=20200601~deb10u2 \
 		iputils-ping=3:20180629-2+deb10u2 \
 	&& mkdir -p "${STEAMAPPDIR}" \
+	# Add entry script
 	&& wget --max-redirect=30 "${DLURL}/master/etc/entry.sh" -O "${HOMEDIR}/entry.sh" \
 	&& chmod +x "${HOMEDIR}/entry.sh" \
 	&& chown -R "${USER}:${USER}" "${HOMEDIR}/entry.sh" "${STEAMAPPDIR}" \
+	# Clean up
 	&& rm -rf /var/lib/apt/lists/*
 
 ENV SERVER_ADMINPW="replacethisyoumadlad" \
@@ -55,10 +57,7 @@ ENV SERVER_ADMINPW="replacethisyoumadlad" \
 # Switch to user
 USER ${USER}
 
-# Switch to workdir
 WORKDIR ${HOMEDIR}
-
-VOLUME ${STEAMAPPDIR}
 
 CMD ["bash", "entry.sh"] 
 
