@@ -27,8 +27,8 @@ RUN set -x \
 		libxtst6=2:1.2.3-1 \
 		libatk1.0-0=2.36.0-2 \
 		libxrandr2=2:1.5.1-1 \
-		libcurl3-gnutls=7.74.0-1.3+deb11u1 \
-		libcurl4=7.74.0-1.3+deb11u1 \
+		libcurl3-gnutls=7.74.0-1.3+deb11u3 \
+		libcurl4=7.74.0-1.3+deb11u3 \
 		wget=1.21-1+deb11u1 \
 		ca-certificates=20210119 \
 		iputils-ping=3:20210202-1 \
