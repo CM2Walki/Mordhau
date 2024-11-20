@@ -18,7 +18,7 @@ RUN set -x \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
 		libfontconfig1=2.14.1-4 \
 		libpangocairo-1.0-0=1.50.12+ds-1 \
-		libnss3=2:3.87.1-1 \
+		libnss3=2:3.87.1-1+deb12u1 \
 		gconf-gsettings-backend=3.2.6-8 \
 		libxi6=2:1.8-1+b1 \
 		libxcursor1=1:1.2.1-1 \
@@ -29,9 +29,9 @@ RUN set -x \
 		libxtst6=2:1.2.3-1.1 \
 		libatk1.0-0=2.46.0-5 \
 		libxrandr2=2:1.5.2-2+b1 \
-		libcurl3-gnutls=7.88.1-10+deb12u5 \
+		libcurl3-gnutls=7.88.1-10+deb12u8 \
 		ca-certificates=20230311 \
-		iputils-ping=3:20221126-1 \
+		iputils-ping=3:20221126-1+deb12u1 \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& chmod +x "${HOMEDIR}/entry.sh" \
 	&& chown -R "${USER}:${USER}" "${HOMEDIR}/entry.sh" "${STEAMAPPDIR}" \
