@@ -29,8 +29,8 @@ RUN set -x \
 		libxtst6=2:1.2.3-1.1 \
 		libatk1.0-0=2.46.0-5 \
 		libxrandr2=2:1.5.2-2+b1 \
-		libcurl3-gnutls=7.88.1-10+deb12u12 \
-		ca-certificates=20230311 \
+		libcurl3-gnutls=7.88.1-10+deb12u14 \
+		ca-certificates=20230311+deb12u1 \
 		iputils-ping=3:20221126-1+deb12u1 \
 	&& mkdir -p "${STEAMAPPDIR}" \
 	&& chmod +x "${HOMEDIR}/entry.sh" \
